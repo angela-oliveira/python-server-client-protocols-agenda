@@ -6,6 +6,7 @@ import json
 # socket
 
 HOST = '127.0.0.1'  # Endereco IP do Servidor
+
 PORT = 5005  # Porta que o Servidor esta
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 dest = (HOST, PORT)
@@ -28,6 +29,9 @@ while True:
         print("Agenda fechada!")
         tcp.close()
         break
+    if nome == '':
+        print("Insira um nome")
+        continue
         
     celular = str(input('Celular: '))
     telefone = str(input('Telefone: '))
@@ -38,47 +42,14 @@ while True:
 
 
     dadosJson = json.dumps(dados_bd)
-    print('{} Inserido na lista'.format(nome))
+    
 
     tcp.sendall(dadosJson.encode()) #dadosenviados
+
+    print(tcp.recv(1024).decode()) #Resposta do banco
 
     # tcp.sendall(nome.encode() + " ".encode() + celular.encode() + " ".encode() + telefone.encode())
     # celular = str(input('celular: '))
     # telefone = str(input('telefone: '))
         
 tcp.close()
-
-
-'''
-#Biblioteca json
-import json
-
-#Criando dicionario
-dados_bd = {}
-
-#Inserindo no dicionario
-dados_bd['nome'] = "Andreia"
-dados_bd['tel'] = 123
-dados_bd['cel'] = 1234
-
-#Printando o dicionario
-print(dados_bd)
-
-print("\n")
-
-#Printando dados com for
-for i in dados_bd:
-    print(dados_bd[i])
-
-print('\n')
-
-#Printando um dado pela chave nome
-print(dados_bd['nome'])
-print('\n')
-
-#Transformando em json
-exemplo_json = json.dumps(dados_bd)
-
-#JSON
-print(exemplo_json)
-'''

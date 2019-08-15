@@ -2,7 +2,7 @@
 import socket
 import _thread
 import db
-
+import json
 
 HOST = '' # Endereco IP do Servidor
 PORT = 5005 # Porta que o Servidor esta
@@ -16,9 +16,6 @@ def conectado(con, cliente):
     print('Conectado por', cliente)
     conec = db.connection()
     while True:
-        '''nome = con.recv(1024).decode('utf-8')
-        celular = con.recv(1024).decode('utf-8')
-        telefone = con.recv(1024).decode('utf-8')'''
         dados_list = con.recv(1024).decode().split(' ')
         if dados_list[0] == 'STOP':
             print('Finalizando conexão com', cliente)
@@ -26,7 +23,9 @@ def conectado(con, cliente):
             
         db.insert_table(conec,dados_list[1],dados_list[3],dados_list[5])
         db.select_table(conec) #exibe os dados do banco
-        print("Dados recebidos: ",dados_list)
+        print("Dados recebidos: Nome-> {} / Celular-> {} / Telefone-> {}".format(dados_list[1],dados_list[3],dados_list[5]))
+        aviso = "Dados foi inserido no banco"
+        con.sendall(aviso.encode())
         #con.close()
         #_thread.exit()
             
