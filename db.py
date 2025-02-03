@@ -33,7 +33,7 @@ def insert_table(con,nome,tel,cel):
  
     con.commit()
 
-def select_table(con):
+def select_tables(con):
     
     cursor = con.cursor()
 
@@ -47,4 +47,4 @@ con = connection()
 sql_table(con)
 
 def sum(a=1,b=2):
- return a+b
+    return a+b
