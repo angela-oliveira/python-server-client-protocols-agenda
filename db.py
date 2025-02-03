@@ -45,3 +45,6 @@ def select_table(con):
         print(row)
 con = connection()
 sql_table(con)
+
+def sum(a=1,b=2):
+ return a+b
