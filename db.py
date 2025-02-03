@@ -48,3 +48,10 @@ sql_table(con)
 
 def sum(a=1,b=2):
     return a+b
+
+def criar_dicionario(name, age,city):
+    return {
+        "nome": name,
+        "idade": age,
+        "cidade": city
+    }
